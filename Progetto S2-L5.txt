@@ -1,0 +1,61 @@
+CODICE ORIGINALE:
+
+1 import datetime                                                          
+2 def assistente_virtuale(comando):                                        
+3     if comando == "Qual è la data di oggi?":                             
+4         oggi = datetime.datetoday()                                      
+5         risposta = "La data di oggi è " + oggi.strftime("%d/%m/%Y")                
+6     elif comando == "Che ore sono?":                                             
+7         ora_attuale = datetime.datetime.now().time()                     
+8         risposta = "L'ora attuale è " + ora_attuale.strftime("%H:%M")    
+9     elif comando == "Come ti chiami?":                                   
+10         risposta = "Mi chiamo Assistente Virtuale"                     
+11     else:                                                              
+12         risposta = "Non ho capito la tua domanda."                      
+13     return risposta                                                     
+14 while True                                                               
+15     comando_utente = input("Cosa vuoi sapere? ")                        
+16     if comando_utente.lower() == "esci":                                
+17         print("Arrivederci!")                                          
+18         break                                                          
+19     else:                                                               
+20         print(assistente_virtuale(comando_utente))                      
+
+
+Il seguente codice permette di avviare un programma che in sostanza lavora come un qualsiasi assistente virtuale. 
+E' possibile porre delle domande preimpostate all'interno del programma e ricevere delle risposte in base a ciò che si sta chiedendo.
+L'assistente virtuale, in questo caso, può dirci che giorno è oggi, che ore sono e come si chiama. 
+Qualsiasi altra domanda non prevista all'interno del programma, farà sì che l'assistente ci risponda di non aver capito la domanda.
+Finchè chiediamo qualcosa, l'assistente ci chiederà in loop cosa vogliamo sapere e questo avviene grazie al While True che ripete in loop il codice.
+Nel momento in cui digitiamo "esci" il loop si interrompe e ci fa uscire dal programma.
+
+CODICE CORRETTO: 
+
+import datetime                                                             # riga 3: if comando == if comando == "Qual è la data di oggi?": ---> if comando.lower() == "qual è la data di oggi?":
+def assistente_virtuale(comando):
+    if comando.lower() == "qual è la data di oggi?":                        # riga 6: elif comando == "Che ore sono?": ---> elif comando.lower() == "che ore sono?":                        
+        oggi = datetime.date.today()                              
+        risposta = "La data di oggi è " + oggi.strftime("%d/%m/%Y")         # riga 9: elif comando == "Come ti chiami?": ---> elif comando.lower() == "come ti chiami?": 
+    elif comando.lower() == "che giorno è oggi?":      
+        oggi = datetime.date.today()                                        # Aggiungengo .lower() ad ogni stringa, posso disabilitare il case sensitive di Python, potendo così porre le domande
+        risposta = "La data di oggi è " + oggi.strftime("%d/%m/%Y")         # sia in maiuscolo che in minuscolo e ricevere comunque una risposta dal programma.
+    elif comando.lower() == "che ore sono?":
+        ora_attuale = datetime.datetime.now().time()                        # riga 4: oggi = datetime.datetoday() ---> oggi = datetime.date.today() 
+        risposta = "L'ora attuale è " + ora_attuale.strftime("%H:%M")       # Ho aggiunto un punto mancante che avrebbe generato un errore di sintassi.
+    elif comando.lower() == "che ora è?":                                     
+        ora_attuale = datetime.datetime.now().time()                        # riga: 14: while True ---> while True:
+        risposta = "L'ora attuale è " + ora_attuale.strftime("%H:%M")       # Ho aggiunto ":" dopo while True perchè avrebbe generato un errore di sintassi.
+    elif comando.lower() == "come ti chiami?":                                
+        risposta = "Mi chiamo Assistente Virtuale"                          # riga: 15: comando_utente = input("Cosa vuoi sapere? ") ---> comando_utente = input("Cosa vuoi sapere? (Scrivi 'esci' se vuoi uscire) ")
+    elif comando.lower() == "qual è il tuo nome?":                          # Ho aggiunto nell'input la parola da scrivere per uscire dal programma per evitare che   
+        risposta = "Mi chiamo Assistente Virtuale"                          # l'utente resti bloccato nel loop non sapendo come uscire.
+    else:                                                                   
+        risposta = "Non ho capito la tua domanda."                          # Inoltre ho aggiunto una variante per ogni domanda, in modo che il programma possa rispondere anche se
+    return risposta                                                         # le domande vengono formulate diversamente. 
+while True:
+    comando_utente = input("Cosa vuoi sapere? (Scrivi 'esci' se vuoi uscire) ")
+    if comando_utente.lower() == "esci":
+        print("Arrivederci!")
+        break
+    else:
+        print(assistente_virtuale(comando_utente))
